@@ -1,0 +1,2 @@
+module PostMastersHelper
+end

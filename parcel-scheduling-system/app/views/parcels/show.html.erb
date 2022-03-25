@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+Weight: <%= @parcel.weight %> <br>
+Volume: <%= @parcel.volume %> <br>
+Source: <%= @parcel.source %> <br>
+Destination: <%= @parcel.destination %> <br>
+Status: <%= @parcel.status %> <br>
+Cost: <%= @parcel.cost %> <br>
+<%= link_to 'Edit', edit_parcel_path(@parcel) %> |
+<%= link_to 'Back', parcels_path %>

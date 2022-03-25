@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-      home_index_path
+      if current_user.type.eql?("PostMaster")
+        parcels_path
+      else
+        home_index_path
+      end
     end
 
     def configure_permitted_parameters
