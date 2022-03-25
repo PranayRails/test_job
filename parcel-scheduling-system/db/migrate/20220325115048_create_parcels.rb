@@ -7,6 +7,7 @@ class CreateParcels < ActiveRecord::Migration[6.1]
       t.string :destination
       t.string :status
       t.decimal :cost
+      t.references :parcel_owner
 
       t.timestamps
     end

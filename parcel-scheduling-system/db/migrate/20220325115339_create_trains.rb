@@ -7,6 +7,7 @@ class CreateTrains < ActiveRecord::Migration[6.1]
       t.integer :volume_capacity
       t.string :status
       t.decimal :cost
+      t.references :train_operator
 
       t.timestamps
     end
