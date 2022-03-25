@@ -1,0 +1,2 @@
+class ParcelOwner < User
+end

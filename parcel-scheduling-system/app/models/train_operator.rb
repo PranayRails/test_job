@@ -1,0 +1,2 @@
+class TrainOperator < User
+end

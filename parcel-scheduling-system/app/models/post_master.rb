@@ -1,0 +1,2 @@
+class PostMaster < User
+end
