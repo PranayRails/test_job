@@ -1,1 +1,5 @@
 submissions/
+parcel-scheduling-system/*yml
+parcel-scheduling-system/Gemfile.lock
+parcel-scheduling-system/db/schema.rb
+parcel-scheduling-system/vendor/bundle/
