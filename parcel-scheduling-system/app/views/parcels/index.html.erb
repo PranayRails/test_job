@@ -41,12 +41,12 @@
               </div>
             </td>
           <% end %>
-          <td scope="row"><%= parcel.weight %></td>
-          <td><%= parcel.volume %></td>
+          <td scope="row"><%= parcel.weight %> kg</td>
+          <td><%= parcel.volume %>m3</td>
           <td><%= parcel.source %></td>
           <td><%= parcel.destination %></td>
           <td><%= parcel.status %></td>
-          <td><%= parcel.cost %></td>
+          <td><%= parcel.cost %>/-</td>
           <td><%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %></td>
           <td><%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %></td>
           <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %></td>
