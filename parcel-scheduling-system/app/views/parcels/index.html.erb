@@ -2,25 +2,25 @@
   <div class="col-md-10">
     <h2>Parcels</h2>
   </div>
-  <% if current_user.is_parcel_owner?%>
-    <div class="col-md-2 mt-2">
-      <%= link_to 'New Parcel', new_parcel_path, class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  <div class="col-md-2 mt-2 d-flex">
+    <% if current_user.is_parcel_owner? %>
+      <div><%= link_to 'New Parcel', new_parcel_path, class: "btn btn-primary" %></div>
+    <%end%>
+
+    <% if current_user.is_post_master? %>
+      <div>
+        <%= link_to 'Book Train', new_train_booking_path, class: 'btn btn-primary', id: 'book_train' %><br>
+        <!-- <span id='available_trains'><%#= Train.available_for_parcels([1,2]) %></span> -->
+      </div>
+    <%end%>
+  </div>
 </div>
 
 <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
-        <%# if current_admin.is_post_master? %>
-          <th scope="col">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="all_checkbox">
-              <label class="custom-control-label" for="all_checkbox"></label>
-            </div>
-          </th>
-        <%#end%>
+        <th scope="col"></th>
         <th scope="col">Weight</th>
         <th scope="col">Volume</th>
         <th scope="col">Source</th>
@@ -33,6 +33,14 @@
     <tbody>
       <% @parcels.each do |parcel| %>
         <tr>
+          <% if current_user.is_post_master? %>
+            <td>
+              <div class="custom-control custom-checkbox child-checkbox">
+                <input name="parcels[]" type="checkbox" class="custom-control-input parcel_checkbox" id="checkbox_<%= parcel.id %>" value="<%= parcel.id %>">
+                <label class="custom-control-label" for="checkbox_<%= parcel.id %>"></label>
+              </div>
+            </td>
+          <% end %>
           <td scope="row"><%= parcel.weight %></td>
           <td><%= parcel.volume %></td>
           <td><%= parcel.source %></td>
@@ -49,7 +57,19 @@
 </div>
 
 <script type="text/javascript">
-  $(document).on('ready turbolinks:load', function() {
-
-  });
+  function selectedParcels() {
+        debugger
+    var parcels_array = ''
+    var trains_count = ''
+    $(".child-checkbox input[type='checkbox']").each(function() {
+      checkbox = this.id.split('_')
+      parcels_array = parcels_array + "parcels%5B%5D="+checkbox[1]+"&"
+      trains_count = trains_count + "%5B%5D" + checkbox[1] + "&"
+    });
+    $("#book_train").prop('href', "/train_bookings/new?"+ parcels_array)
+    // $("#available_trains")
+  }
+  $('.parcel_checkbox').click(function(){
+   selectedParcels();
+  })
 </script>
