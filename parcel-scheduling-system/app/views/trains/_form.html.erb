@@ -1,5 +1,13 @@
 <% path = @train.new_record? ? trains_path : train_path(@train) %>
 <%= form_for(@train, url: path, html: {:class => "form-horizontal center"}, data: { turbo: false }) do |f| %>
+<% if @train.errors.any? %>
+      <ul>
+    <% @train.errors.full_messages.each do |message| %>
+      <li class="error-message"><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
   <div class="card container">
     <div class="card-body">
       <div class="form-group mb-3">

@@ -18,7 +18,7 @@ class TrainBookingsController < ApplicationController
     @train_booking = TrainBooking.new(train_booking_params)
 
     if @train_booking.save
-      redirect_to train_booking_url(@train_booking), notice: "Train booking was successfully created."
+      redirect_to train_booking_url(@train_booking), success: "Train booking is successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class TrainBookingsController < ApplicationController
 
   def update
     if @train_booking.update(train_booking_params)
-      redirect_to train_booking_url(@train_booking), notice: "Train booking was successfully updated."
+      redirect_to train_booking_url(@train_booking), success: "Train booking is successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,13 +34,13 @@ class TrainBookingsController < ApplicationController
 
   def destroy
     @train_booking.destroy
-    redirect_to train_bookings_url, notice: "Train booking was successfully destroyed."
+    redirect_to train_bookings_url, success: "Train booking is successfully destroyed."
   end
 
   private
     def authenticate_post_master
       return if current_user.is_post_master?
-      redirect_to train_bookings_url, notice: "Unauthorised access denied."
+      redirect_to train_bookings_url, success: "Unauthorised access denied."
     end
 
     def set_train_booking

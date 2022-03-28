@@ -1,14 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-10">
+    <h2>Trains</h2>
+  </div>
+  <div class="col-md-2 mt-2">
+    <%= link_to 'Edit Parcels', edit_train_path(@train), class: "btn btn-primary" %>
+    <%= link_to 'Back', trains_path, class: "btn btn-primary" %>
+  </div>
+</div>
 
-<p>
-	<strong>Weight Capacity:</strong> <%= @train.weight_capacity %> <br>
-	<strong>Volume: </strong><%= @train.volume_capacity %> <br>
-	<strong>Source: </strong><%= @train.source %> <br>
-	<strong>Destination: </strong><%= @train.destination %> <br>
-	<strong>Status: </strong><%= @train.status %> <br>
-	<strong>Cost: </strong><%= @train.cost %> <br>
-</p>
-
-<hr />
-<%= link_to 'Edit', edit_train_path(@train) %> |
-<%= link_to 'Back', trains_path %>
+<div class="table-responsive">
+  <table class="table">
+      <tr>
+        <th scope="col">Weight Capacity</th>
+        <td><%= @train.weight_capacity %></td>
+      </tr>
+      <tr>
+        <th scope="col">Volume</th>
+        <td><%= @train.volume_capacity %></td>
+      </tr>
+      <tr>
+        <th scope="col">Source</th>
+        <td><%= @train.source %></td>
+      </tr>
+      <tr>
+        <th scope="col">Destination</th>
+        <td><%= @train.destination %></td>
+      </tr>
+      <tr>
+        <th scope="col">Status</th>
+        <td><%= @train.status %></td>
+      </tr>
+      <tr>
+        <th scope="col">Cost</th>
+        <td><%= @train.cost %></td>
+      </tr>
+  </table>
+</div>
