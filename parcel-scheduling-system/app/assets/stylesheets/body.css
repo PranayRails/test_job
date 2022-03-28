@@ -1,0 +1,71 @@
+
+body {
+  background-color: #ececec;
+}
+.login-shadow{
+  -webkit-box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
+  -moz-box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.68);
+  box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
+  width: 500px;
+  border-radius: 10px;
+  padding: 15px 20px;
+  background-color: #fff;
+}
+.profile-box {
+  width: 850px !important;
+}
+.profile-box {
+  width: 1000px !important;
+}
+.login-page {
+  height: 100vh;
+  align-items: center;
+}
+
+.logout {
+  float: right;
+  padding-right: 15px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.hide {
+  display: none;
+}
+
+.hidden {
+  visibility: none;
+}
+
+hr:not([size]) {
+  height: 1px;
+}
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.btn.btn-primary {
+  background-color: #427acd;
+}
+
+.error-message {
+  color: red;
+}
+
+.ml-3 {
+  margin-left: 20% !important;
+}
+
+.mr-3 {
+  margin-right: 20% !important;
+}
+
+.pl-1 {
+  padding-left: 10px;
+}

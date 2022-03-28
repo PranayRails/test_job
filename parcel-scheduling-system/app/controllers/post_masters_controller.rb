@@ -13,7 +13,8 @@ class PostMastersController < ApplicationController
     @post_master = PostMaster.new(post_master_params)
 
     if @post_master.save
-      redirect_to post_master_url(@post_master), notice: "Post master was successfully created."
+      flash[:success] = "Post master is successfully created."
+      redirect_to post_master_url(@post_master)
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +22,8 @@ class PostMastersController < ApplicationController
 
   def update
     if @post_master.update(post_master_params)
-      redirect_to post_master_url(@post_master), notice: "Post master was successfully updated."
+      flash[:success] = "Post master is successfully updated."
+      redirect_to post_master_url(@post_master)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +31,8 @@ class PostMastersController < ApplicationController
 
   def destroy
     @post_master.destroy
-    redirect_to post_masters_url, notice: "Post master was successfully destroyed."
+    flash[:success] = "Post master is successfully destroyed."
+    redirect_to post_masters_url
   end
 
   private

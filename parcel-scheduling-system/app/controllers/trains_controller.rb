@@ -13,7 +13,8 @@ class TrainsController < ApplicationController
     @train = current_user.trains.build(train_params)
 
     if @train.save
-      redirect_to train_url(@train), notice: "Train was successfully created."
+      flash[:success] = "Train is successfully created."
+      redirect_to train_url(@train)
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +22,8 @@ class TrainsController < ApplicationController
 
   def update
     if @train.update(train_params)
-      redirect_to train_url(@train), notice: "Train was successfully updated."
+      flash[:success] = "Train is successfully updated."
+      redirect_to train_url(@train)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +31,8 @@ class TrainsController < ApplicationController
 
   def destroy
     return unless @train.destroy
-    redirect_to trains_url, notice: "Train was successfully destroyed."
+    flash[:success] = "Train is successfully destroyed."
+    redirect_to trains_url
   end
 
   private

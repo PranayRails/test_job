@@ -37,12 +37,8 @@ class ParcelsController < ApplicationController
   end
 
   def destroy
-    if @parcel.destroy
-      flash[:success] = "Parcel is successfully deleted."
-    else
-      flash[:error] = "Somthing went wrong with this parcel"
-    end
-    redirect_to parcel_url
+    return unless @parcel.destroy
+    redirect_to parcel_url, success: "Parcel is successfully destroyed."
   end
 
   private
