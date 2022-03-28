@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row login-page">
     <div class="col-md-6 col-sm-6 form-group">
-      <h1 class="display-3"><b>Content Management</b></h1>
+      <h2 class="display-3"><b>Parcel Scheduling System</b></h2>
     </div>
     <div class= "col-md-6 col-sm-6 form-group">
       <div class="container login-shadow">
@@ -11,14 +11,14 @@
           <h2 class="text-left"><b>Sign In</b></h2>
         </div>
         <hr>
-        <div class="form-row">
+        <div class="form">
           <div class="form-group">
             <%= f.email_field :email,class: "form-control mb-3",placeholder: "Email"%>
           </div>
+          <div class="form-group">
+            <%= f.password_field :password,class: "form-control mb-3",placeholder: "Password" %>
+          </div>
         <div>
-        <div class="form-group">
-          <%= f.password_field :password,class: "form-control mb-3",placeholder: "Password" %>
-        </div>
 
         <div class="actions">
           <%= f.submit "Sign in",style: "height:40px; width:200px",class:"btn btn-success bg-blue text-white" %>

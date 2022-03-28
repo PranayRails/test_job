@@ -65,7 +65,6 @@ class ParcelsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def parcel_params
-      byebug
       params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
     end
 end

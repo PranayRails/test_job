@@ -1,6 +1,11 @@
-<h1>Editing Parcel</h1>
+<div class="row">
+  <div class="col-md-10">
+    <h2>Editing Parcel</h2>
+  </div>
+  <div class="col-md-2 mt-2">
+    <%= link_to "Back", parcels_path, class: "btn btn-sm btn-primary"%>
+  </div>
+  <hr>
+</div>
 
 <%= render 'form', parcel: @parcel %>
-
-<%= link_to 'Show', @parcel %> |
-<%= link_to 'Back', parcels_path %>
