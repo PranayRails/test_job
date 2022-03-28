@@ -4,7 +4,14 @@
   <% path = parcel_path(@parcel) %>
 <% end %>
 
-<%= form_for(@parcel, url: path, html: {:class => "form-horizontal center"}, data: { turbo: false }) do |f| %>
+<%= form_for(@parcel, url: path, html: {:class => "form-horizontal center"}) do |f| %>
+  <% if @parcel.errors.any? %>
+    <ul>
+    <% @parcel.errors.full_messages.each do |message| %>
+      <li class="error-message"><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
 
   <div class="card container">
     <div class="card-body">
@@ -13,7 +20,7 @@
         <div class="row">
           <%= f.label "Weight", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :weight, class: 'form-control', autofocus: true %>
+            <%= f.text_field :weight, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>
@@ -22,7 +29,7 @@
         <div class="row">
           <%= f.label "Volume", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :volume, class: 'form-control', autofocus: true %>
+            <%= f.text_field :volume, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>
@@ -31,7 +38,7 @@
         <div class="row">
           <%= f.label "Source", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :source, class: 'form-control', autofocus: true %>
+            <%= f.text_field :source, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>
@@ -40,7 +47,7 @@
         <div class="row">
           <%= f.label "Destination", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :destination, class: 'form-control', autofocus: true %>
+            <%= f.text_field :destination, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>
@@ -49,7 +56,7 @@
         <div class="row">
           <%= f.label "Status", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :status, class: 'form-control', autofocus: true %>
+            <%= f.text_field :status, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>
@@ -58,7 +65,7 @@
         <div class="row">
           <%= f.label "Cost", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :cost, class: 'form-control', autofocus: true %>
+            <%= f.text_field :cost, class: 'form-control', autofocus: true, required: true %>
           </div>
         </div>
       </div>

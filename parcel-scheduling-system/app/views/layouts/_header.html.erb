@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-bar container-fluid">
-  <a class="navbar-brand" href="#">Content</a>
+  <a class="navbar-brand" href="#">Parcel Scheduling</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,8 +10,6 @@
         <li class="nav-item active">
           <a class="nav-link hover-underline-animation" href="/home/index">Home <span class="sr-only"></span></a>
         </li>
-      <% end %>
-      <% if current_user.present? %>
         <li class="nav-item active">
           <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
         </li>
