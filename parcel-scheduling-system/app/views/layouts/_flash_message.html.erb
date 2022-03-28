@@ -2,9 +2,14 @@
   <% flash.each do |key, value| %>
     <div class="flash <%= flash_class(key) %>">
       <%= value %>
-      <button type="button" class="close btn btn-sm btn-primary" aria-label="Close">
+      <button type="button" class="close btn btn-sm btn-default" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   <% end %>
 </div>
+<script type="text/javascript">
+  $(".close").click(function() {
+    $( ".flash").hide();
+  })
+</script>
