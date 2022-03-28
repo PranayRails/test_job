@@ -1,71 +1,57 @@
+# frozen_string_literal: true
+
+# ParcelsController
 class ParcelsController < ApplicationController
-  before_action :set_parcel, only: %i[ show edit update destroy ]
+  before_action :authenicate_parcel_owner, only: [:create, :update, :destroy]
+  before_action :set_parcel, only: %i[show edit update destroy]
 
-  # GET /parcels or /parcels.json
   def index
-    @parcels = Parcel.all
+    @parcels = if current_user.is_post_master?
+                 Parcel.all
+               else
+                 current_user.parcels
+               end.page(params[:page]).per(10)
   end
 
-  # GET /parcels/1 or /parcels/1.json
-  def show
-  end
-
-  # GET /parcels/new
   def new
     @parcel = Parcel.new
   end
 
-  # GET /parcels/1/edit
-  def edit
-  end
-
-  # POST /parcels or /parcels.json
   def create
-    @parcel = Parcel.new(parcel_params)
+    @parcel = current_user.parcels.build(parcel_params)
 
-    respond_to do |format|
-      if @parcel.save
-        format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully created." }
-        format.json { render :show, status: :created, location: @parcel }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @parcel.errors, status: :unprocessable_entity }
-      end
+    if @parcel.save
+      redirect_to parcel_url(@parcel), notice: 'Parcel was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /parcels/1 or /parcels/1.json
   def update
-    respond_to do |format|
-      if @parcel.update(parcel_params)
-        format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully updated." }
-        format.json { render :show, status: :ok, location: @parcel }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @parcel.errors, status: :unprocessable_entity }
-      end
+    if @parcel.update(parcel_params)
+      redirect_to parcel_url(@parcel), notice: 'Parcel was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /parcels/1 or /parcels/1.json
   def destroy
     @parcel.destroy
-
-    respond_to do |format|
-      format.html { redirect_to parcels_url, notice: "Parcel was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to parcels_url, notice: 'Parcel was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_parcel
-      @parcel = Parcel.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def parcel_params
-      byebug
-      params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
-    end
+  def authenicate_parcel_owner
+    return if current_user.is_parcel_owner?
+    redirect_to parcels_url, notice: "Unauthorised access denied."
+  end
+
+  def set_parcel
+    @parcel = Parcel.find(params[:id])
+  end
+
+  def parcel_params
+    params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
+  end
 end

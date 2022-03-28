@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>Weight Capacity:</strong> <%= @train.weight_capacity %> <br>
+	<strong>Volume: </strong><%= @train.volume_capacity %> <br>
+	<strong>Source: </strong><%= @train.source %> <br>
+	<strong>Destination: </strong><%= @train.destination %> <br>
+	<strong>Status: </strong><%= @train.status %> <br>
+	<strong>Cost: </strong><%= @train.cost %> <br>
+</p>
+
+<hr />
+<%= link_to 'Edit', edit_train_path(@train) %> |
+<%= link_to 'Back', trains_path %>
