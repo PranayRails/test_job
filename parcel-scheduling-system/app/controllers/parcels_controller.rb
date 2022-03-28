@@ -2,7 +2,7 @@
 
 # ParcelsController
 class ParcelsController < ApplicationController
-  before_action :authenicate_parcel_owner, only: [:create, :update, :destroy]
+  before_action :authenicate_parcel_owner
   before_action :set_parcel, only: %i[show edit update destroy]
 
   def index
@@ -44,8 +44,8 @@ class ParcelsController < ApplicationController
   private
 
   def authenicate_parcel_owner
-    return if current_user.is_parcel_owner?
-    redirect_to parcels_url, notice: "Unauthorised access denied."
+    return unless current_user.is_train_operator?
+    redirect_to root_url, notice: "Unauthorised access denied."
   end
 
   def set_parcel
@@ -53,6 +53,6 @@ class ParcelsController < ApplicationController
   end
 
   def parcel_params
-    params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
+    params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost, :parcel_owner_id)
   end
 end

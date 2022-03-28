@@ -11,6 +11,7 @@
 
   <div class="card container">
     <div class="card-body">
+      <%= f.hidden_field :parcel_owner_id, value: current_user.id %>
 
       <div class="form-group mb-3">
         <div class="row">
