@@ -1,8 +1,16 @@
+# frozen_string_literal: true
+
+# ParcelsController
 class ParcelsController < ApplicationController
-  before_action :set_parcel, only: %i[ show edit update destroy ]
+  before_action :authenicate_parcel_owner, only: [:create, :update, :destroy]
+  before_action :set_parcel, only: %i[show edit update destroy]
 
   def index
-    @parcels = Parcel.all
+    @parcels = if current_user.is_post_master?
+                 Parcel.all
+               else
+                 current_user.parcels
+               end.page(params[:page]).per(10)
   end
 
   def new
@@ -38,11 +46,17 @@ class ParcelsController < ApplicationController
   end
 
   private
-    def set_parcel
-      @parcel = Parcel.find(params[:id])
-    end
 
-    def parcel_params
-      params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
-    end
+  def authenicate_parcel_owner
+    return if current_user.is_parcel_owner?
+    redirect_to parcels_url, notice: "Unauthorised access denied."
+  end
+
+  def set_parcel
+    @parcel = Parcel.find(params[:id])
+  end
+
+  def parcel_params
+    params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost)
+  end
 end
