@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-bar container-fluid">
-  <a class="navbar-brand" href="#">Parcel Scheduling</a>
+  <%= link_to "Parcel Scheduling", root_url, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,9 +7,11 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user.present? %>
-        <li class="nav-item active">
-          <p class="nav-link hover-underline-animation"> <%= current_user.name %> </p>
-        </li>
+        <% if current_user.is_post_master? %>
+          <li class="nav-item active">
+            <%= link_to "Bookings", train_bookings_path, method: :delete, class: "nav-link hover-underline-animation"%>
+          </li>
+        <% end %>
         <li class="nav-item active">
           <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
         </li>

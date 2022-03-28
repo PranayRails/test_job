@@ -15,8 +15,8 @@ class TrainBookingsController < ApplicationController
   end
 
   def create
-    @train_booking = TrainBooking.new(train_booking_params)
-
+    @train_booking = TrainBooking.new(train_booking_params.merge(departure_time: Time.now, arrival_time: Time.now+3.hours))
+    byebug
     if @train_booking.save
       flash[:success] = "Train booking is successfully created."
       redirect_to train_booking_url(@train_booking)
@@ -52,6 +52,6 @@ class TrainBookingsController < ApplicationController
     end
 
     def train_booking_params
-      params.fetch(:train_booking, {})
+      params.required(:train_booking).permit(:train_id, :post_master_id, :status)
     end
 end

@@ -1,4 +1,5 @@
 class TrainsController < ApplicationController
+  before_action :authenicate_parcel_owner
   before_action :set_train, only: %i[ show edit update destroy ]
 
   def index
@@ -36,6 +37,11 @@ class TrainsController < ApplicationController
   end
 
   private
+    def authenicate_parcel_owner
+      return if current_user.is_train_operator?
+      redirect_to root_url, notice: "Unauthorised access denied."
+    end
+
     def set_train
       @train = Train.find(params[:id])
     end

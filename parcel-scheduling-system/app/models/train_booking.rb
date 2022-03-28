@@ -7,5 +7,5 @@ class TrainBooking < ApplicationRecord
 
   enum status: { running: 'Running', completed: 'Completed'}, _default: 'Running'
 
-  validates_presence_of :departure_time, :arrival_time, :source, :destination, :status
+  validates_presence_of :departure_time, :arrival_time, :status
 end

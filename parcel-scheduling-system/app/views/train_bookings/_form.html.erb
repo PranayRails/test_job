@@ -9,51 +9,24 @@
     </ul>
   <% end %>
 
-
-
-<!--  => TrainBooking(id: integer, departure_time: datetime, arrival_time: datetime, status: string, train_id: integer, parcel_id: integer, post_master_id: integer, created_at: datetime, updated_at: datetime) 
- -->
-
-
-
-
   <div class="card container">
     <div class="card-body">
+      <%= f.hidden_field :post_master_id, value: current_user.id %>
 
       <div class="form-group mb-3">
         <div class="row">
           <%= f.label "Train", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.select :train, Train.all, class: 'form-control', autofocus: true, required: true %>
+            <%= f.select :train_id, get_trains, {}, {class: 'form-control', autofocus: true, required: true} %>
           </div>
         </div>
       </div>
-
-      <!-- <%= f.select :skills_list, options_for_select(["Asst", "dir", "pres"]), {}, {:multiple => true, :class => "chzn-select", :style => "width:450px;" } %> -->
 
       <div class="form-group mb-3">
         <div class="row">
           <%= f.label "parcels", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.select :parcel, options_for_select(["Asst", "dir", "pres"]), {}, {multiple: true, class: 'form-control', autofocus: true, required: true %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "Source", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.select(:source, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true, required: true}) %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "Destination", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.select(:destination, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true, required: true}) %>
+            <%= f.select :parcels, options_for_select(["Asst", "dir", "pres"]), {}, {multiple: true, class: 'form-control', autofocus: true, required: true} %>
           </div>
         </div>
       </div>
@@ -62,16 +35,7 @@
         <div class="row">
           <%= f.label "Status", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.text_field :status, class: 'form-control', autofocus: true, required: true %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "Cost", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.text_field :cost, class: 'form-control', autofocus: true, required: true %>
+            <%= f.select :status, TrainBooking.statuses.keys, {}, {class: 'form-control', autofocus: true, required: true, include_blank: false} %>
           </div>
         </div>
       </div>
