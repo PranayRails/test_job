@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     case current_user.type
     when 'TrainOperator' then trains_path
     when 'ParcelOwner' then parcels_path
-    when 'PostMaster' then train_bookings_path 
+    when 'PostMaster' then new_train_booking_path 
     else home_index_path
     end
   end

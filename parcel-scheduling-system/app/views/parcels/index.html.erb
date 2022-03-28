@@ -11,6 +11,14 @@
   <table class="table">
     <thead>
       <tr>
+        <%# if current_admin.is_post_master? %>
+          <th scope="col">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="all_checkbox">
+              <label class="custom-control-label" for="all_checkbox"></label>
+            </div>
+          </th>
+        <%#end%>
         <th scope="col">Weight</th>
         <th scope="col">Volume</th>
         <th scope="col">Source</th>
@@ -37,3 +45,9 @@
     </tbody>
   </table>
 </div>
+
+<script type="text/javascript">
+  $(document).on('ready turbolinks:load', function() {
+    
+  });
+</script>

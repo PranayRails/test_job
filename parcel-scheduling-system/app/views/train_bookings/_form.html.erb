@@ -1,17 +1,81 @@
-<%= form_with(model: train_booking) do |form| %>
-  <% if train_booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(train_booking.errors.count, "error") %> prohibited this train_booking from being saved:</h2>
+<% path = @train_booking.new_record? ? train_bookings_path : train_booking_path(@train_booking) %>
 
-      <ul>
-        <% train_booking.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= form_for(@train_booking, url: path, html: {:class => "form-horizontal center"}) do |f| %>
+  <% if @train_booking.errors.any? %>
+    <ul>
+    <% @train_booking.errors.full_messages.each do |message| %>
+      <li class="error-message"><%= message %></li>
+    <% end %>
+    </ul>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+
+
+<!--  => TrainBooking(id: integer, departure_time: datetime, arrival_time: datetime, status: string, train_id: integer, parcel_id: integer, post_master_id: integer, created_at: datetime, updated_at: datetime) 
+ -->
+
+
+
+
+  <div class="card container">
+    <div class="card-body">
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Train", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.select :train, Train.all, class: 'form-control', autofocus: true, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <!-- <%= f.select :skills_list, options_for_select(["Asst", "dir", "pres"]), {}, {:multiple => true, :class => "chzn-select", :style => "width:450px;" } %> -->
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "parcels", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.select :parcel, options_for_select(["Asst", "dir", "pres"]), {}, {multiple: true, class: 'form-control', autofocus: true, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Source", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.select(:source, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true, required: true}) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Destination", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.select(:destination, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true, required: true}) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Status", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :status, class: 'form-control', autofocus: true, required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Cost", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :cost, class: 'form-control', autofocus: true, required: true %>
+          </div>
+        </div>
+      </div>
+      <%= f.submit 'submit', class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
