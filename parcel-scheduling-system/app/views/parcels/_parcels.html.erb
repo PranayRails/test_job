@@ -1,0 +1,43 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% if current_user.post_master? %>
+          <th scope="col"></th>
+        <% end %>
+        <th scope="col">Weight</th>
+        <th scope="col">Volume</th>
+        <th scope="col">Source</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Status</th>
+        <th scope="col">Cost</th>
+        <th scope="col" colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% parcels.each do |parcel| %>
+        <tr>
+          <% if current_user.post_master? %>
+            <td>
+              <div class="custom-control custom-checkbox child-checkbox">
+                <input name="parcels[]" type="checkbox" class="custom-control-input parcel_checkbox" id="checkbox_<%= parcel.id %>" value="<%= parcel.id %>">
+                <label class="custom-control-label" for="checkbox_<%= parcel.id %>"></label>
+              </div>
+            </td>
+          <% end %>
+          <td scope="row"><%= parcel.weight %> kg</td>
+          <td><%= parcel.volume %>m3</td>
+          <td id="source_<%= parcel.id %>"><%= parcel.source %></td>
+          <td id="destination_<%= parcel.id %>"><%= parcel.destination %></td>
+          <td><%= parcel.status %></td>
+          <td><%= parcel.cost %></td>
+          <td>
+            <%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+          </td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

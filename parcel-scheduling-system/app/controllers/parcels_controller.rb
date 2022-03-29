@@ -6,7 +6,7 @@ class ParcelsController < ApplicationController
   before_action :set_parcel, only: %i[show edit update destroy]
 
   def index
-    @parcels = if current_user.is_post_master?
+    @parcels = if current_user.post_master?
                  Parcel.all
                else
                  current_user.parcels
@@ -20,8 +20,8 @@ class ParcelsController < ApplicationController
   def create
     @parcel = Parcel.new(parcel_params)
     if @parcel.save
-     flash[:success] = "Parcel is successfully created"
-     redirect_to parcel_url(@parcel)
+      flash[:success] = 'Parcel is successfully created'
+      redirect_to parcel_url(@parcel)
     else
       render :new
     end
@@ -29,7 +29,7 @@ class ParcelsController < ApplicationController
 
   def update
     if @parcel.update(parcel_params)
-      flash[:success] = "Parcel is successfully updated"
+      flash[:success] = 'Parcel is successfully updated'
       redirect_to parcel_url(@parcel)
     else
       render :edit
@@ -38,14 +38,16 @@ class ParcelsController < ApplicationController
 
   def destroy
     return unless @parcel.destroy
-    redirect_to parcel_url, success: "Parcel is successfully destroyed."
+
+    redirect_to parcel_url, success: 'Parcel is successfully destroyed.'
   end
 
   private
 
   def authenicate_parcel_owner
-    return unless current_user.is_train_operator?
-    redirect_to root_url, notice: "Unauthorised access denied."
+    return unless current_user.train_operator?
+
+    redirect_to root_url, notice: 'Unauthorised access denied.'
   end
 
   def set_parcel

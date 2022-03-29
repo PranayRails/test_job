@@ -1,5 +1,5 @@
 class TrainBooking < ApplicationRecord
-	attr_accessor :parcels
+	attr_accessor :parcel_ids
 
 	has_many :parcels
 	belongs_to :train
@@ -12,20 +12,24 @@ class TrainBooking < ApplicationRecord
   validates_presence_of :train_id, :post_master_id, :status
 
   before_create :add_attributes
-  after_create :update_train
-  after_create :update_parcels
+  after_create :update_train!, :parcels_train_booking!
 
   def add_attributes
   	self.departure_time = Time.now
   	self.arrival_time = Time.now + 3.hours
   end
 
-  def update_train
+  def parcel_ids=(val = [])
+    @parcel_ids = val.split(' ')
+  end
+
+  def update_train!
   	self.train.running!
   end
 
-  def update_parcels
-  	Parcel.where(id: parcels.split(' ')).each(&:shipped!)
+  def parcels_train_booking!
+    parcels = Parcel.where(id: parcel_ids)
+    parcels.update_all(status: 'shipped', train_booking_id: self.id)
   end
 
   def self.busy_lines?(parcels)

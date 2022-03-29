@@ -1,6 +1,4 @@
-<% path = @parcel.new_record? ? parcels_path : parcel_path(@parcel) %>
-
-<%= form_for(@parcel, url: path, html: {:class => "form-horizontal center"}) do |f| %>
+<%= form_for(@parcel, html: {:class => "form-horizontal center"}) do |f| %>
   <% if @parcel.errors.any? %>
     <ul>
     <% @parcel.errors.full_messages.each do |message| %>

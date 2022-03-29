@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <% trains.each do |train| %>
+        <% @trains.each do |train| %>
           <tr>
             <td><%= f.radio_button :train_id, train.id, checked: false %></td>
             <td scope="row"><%= train.weight_capacity %> kg</td>
@@ -28,7 +28,7 @@
       </tbody>
     </table>
   </div>
-  <%= f.hidden_field :parcels, value: @parcel_ids %>
+  <%= f.hidden_field :parcel_ids, value: @parcels.ids %>
   <%= f.submit 'submit', class: "btn btn-primary" %>
 <% else %>
   <hr>

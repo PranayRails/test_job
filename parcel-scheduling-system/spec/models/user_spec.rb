@@ -21,15 +21,15 @@ RSpec.describe User, type: :model do
 
   describe 'expects user to be' do
     it "train-operator" do
-      expect(@train_operator.is_train_operator?).to eq(true)
+      expect(@train_operator.train_operator?).to eq(true)
     end
 
     it "post-master" do
-      expect(@post_master.is_post_master?).to eq(true)
+      expect(@post_master.post_master?).to eq(true)
     end
 
     it "parcel-owner" do
-      expect(@parcel_owner.is_parcel_owner?).to eq(true)
+      expect(@parcel_owner.parcel_owner?).to eq(true)
     end
   end
 end

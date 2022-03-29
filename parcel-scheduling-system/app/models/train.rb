@@ -18,8 +18,6 @@ class Train < ApplicationRecord
   validate :validate_source_and_destination
 
   def self.available_for_parcels(parcels)
-    ids = parcels.ids
-    where(source: parcels.first.source, destination: parcels.first.destination).where('weight_capacity > ? AND volume_capacity > ?', Parcel.sum_weight(ids), Parcel.sum_volume(ids)).available.order(:weight_capacity, :volume_capacity)
+    where('weight_capacity > ? AND volume_capacity > ?', parcels.sum(:weight), parcels.sum(:volume)).available.order(:weight_capacity, :volume_capacity)
   end
-
 end

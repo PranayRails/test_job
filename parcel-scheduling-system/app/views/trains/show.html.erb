@@ -8,35 +8,4 @@
   </div>
 </div>
 
-<div class="table-responsive">
-  <table class="table">
-      <tr>
-        <th scope="col">Name</th>
-        <td><%= @train.name %></td>
-      </tr>
-      <tr>
-        <th scope="col">Weight Capacity</th>
-        <td><%= @train.weight_capacity %></td>
-      </tr>
-      <tr>
-        <th scope="col">Volume</th>
-        <td><%= @train.volume_capacity %></td>
-      </tr>
-      <tr>
-        <th scope="col">Source</th>
-        <td><%= @train.source %></td>
-      </tr>
-      <tr>
-        <th scope="col">Destination</th>
-        <td><%= @train.destination %></td>
-      </tr>
-      <tr>
-        <th scope="col">Status</th>
-        <td><%= @train.status %></td>
-      </tr>
-      <tr>
-        <th scope="col">Cost</th>
-        <td><%= @train.cost %></td>
-      </tr>
-  </table>
-</div>
+<%= render 'train_details', train: @train %>
