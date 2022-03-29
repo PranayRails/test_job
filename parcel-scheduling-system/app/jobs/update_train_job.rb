@@ -7,15 +7,15 @@ class UpdateTrainJob
     parcels = train_booking.parcels
 
     # update train status
-    train.update(status: "reached")
+    train.reached!
 
     # swap source and destination
     train.update(source: train.destination, destination: train.source)
 
     # update parcels status
-    parcels.update(status: "delivered")
+    parcels.each(&:delivered!)
 
     # update train booking status
-    train_booking.update(status: "complete")
+    train_booking.complete!
   end
 end

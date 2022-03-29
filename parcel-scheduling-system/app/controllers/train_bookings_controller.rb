@@ -11,11 +11,12 @@ class TrainBookingsController < ApplicationController
   end
 
   def new
-    @train_booking = TrainBooking.new
+    @parcel_ids = params[:parcels]
+    @train_booking = current_user.train_bookings.build
   end
 
   def create
-    @train_booking = TrainBooking.new(train_booking_params.merge(departure_time: Time.now, arrival_time: Time.now+3.hours))
+    @train_booking = current_user.train_bookings.build(train_booking_params)
     if @train_booking.save
       flash[:success] = "Train booking is successfully created."
       redirect_to train_booking_url(@train_booking)
@@ -51,6 +52,6 @@ class TrainBookingsController < ApplicationController
     end
 
     def train_booking_params
-      params.required(:train_booking).permit(:train_id, :post_master_id, :status)
+      params.required(:train_booking).permit(:train_id, :post_master_id, :parcels)
     end
 end

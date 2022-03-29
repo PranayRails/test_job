@@ -9,39 +9,45 @@
 train_operator = TrainOperator.create(
   name: "Train Operator",
   email: "train-operator@yopmail.com",
-  password: "train-operator")
+  password: "train-operator"
+)
 
 PostMaster.create(
   name: "Post Master",
   email: "post-master@yopmail.com",
-  password: "post-master")
+  password: "post-master"
+)
 
-ParcelOwner.create(
+ParcelOwner.create!(
   name: "Parcel Owner",
   email: "parcel-owner@yopmail.com",
-  password: "parcel-owner")
+  password: "parcel-owner"
+)
 
 Train.create(
+  name: 'Thomas',
   source: "A",
   destination: "B",
   weight_capacity: 500,
   volume_capacity: 8,
   cost: 200,
   train_operator_id: train_operator.id
-  )
+)
 Train.create(
+  name: 'george',
   source: "B",
   destination: "C",
   weight_capacity: 150,
   volume_capacity: 1,
   cost: 150,
   train_operator_id: train_operator.id
-  )
+)
 Train.create(
+  name: 'Percy',
   source: "A",
   destination: "C",
   weight_capacity: 300,
   volume_capacity: 4,
   cost: 300,
   train_operator_id: train_operator.id
-  )
+)
