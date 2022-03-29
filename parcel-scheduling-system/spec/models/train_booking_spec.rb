@@ -4,7 +4,7 @@ RSpec.describe TrainBooking, type: :model do
 
   before(:example) do
     @trains_operator = TrainOperator.create( name: "Train Operator", email: "train-operator@yopmail.com", password: "train-operator")
-    @train = Train.create(source: 'source 1', destination: 'dest 2', weight_capacity: 200, volume_capacity: 10000, status: 'Available', cost: 200, train_operator_id: @trains_operator.id)
+    @train = Train.create(name: 'Thomas', source: 'source 1', destination: 'dest 2', weight_capacity: 200, volume_capacity: 10000, status: 'Available', cost: 200, train_operator_id: @trains_operator.id)
     @parcel_owner = ParcelOwner.create( name: "Parcel Owner", email: "parcel-owner@yopmail.com", password: "parcel-owner")
     @parcel = Parcel.create(weight: 20.3, volume: 30, source: 'source 1', destination: 'dest 2', status: 'Booked', cost: 30.0, parcel_owner_id: @parcel_owner.id)
     @post_master = PostMaster.create( name: "Post Master", email: "post-master@yopmail.com", password: "post-master")
@@ -18,8 +18,6 @@ RSpec.describe TrainBooking, type: :model do
   end
 
   describe 'Validations' do
-    it { should validate_presence_of(:departure_time) }
-    it { should validate_presence_of(:arrival_time) }
     it { should validate_presence_of(:status) }
   end
 
