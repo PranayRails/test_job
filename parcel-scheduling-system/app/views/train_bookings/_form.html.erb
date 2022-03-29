@@ -15,15 +15,15 @@
         <table class="table">
             <tr>
               <th scope="col">Parcels Count</th>
-              <td><%#= @parcel_ids.count %></td>
+              <td><%#= @parcels.ids.count %></td>
             </tr>
             <tr>
               <th scope="col">Parcels Total Weight</th>
-              <td><%= Parcel.sum_weight(@parcel_ids) %></td>
+              <td><%#= Parcel.sum_weight(@parcels) %></td>
             </tr>
             <tr>
               <th scope="col">Parcels Total Volume</th>
-              <td><%= Parcel.sum_volume(@parcel_ids) %></td>
+              <td><%#= Parcel.sum_volume(@parcels) %></td>
             </tr>
         </table>
       </div>

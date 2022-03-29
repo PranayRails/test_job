@@ -9,12 +9,12 @@ class Parcel < ApplicationRecord
 
 	validate :validate_source_and_destination
 
-	def self.sum_weight(parcel_ids)
-		Parcel.where(id: parcel_ids).sum(:weight)
+	def self.sum_weight(parcels)
+		parcels.sum(:weight)
 	end
 
-	def self.sum_volume(parcel_ids)
-		Parcel.where(id: parcel_ids).sum(:volume)
+	def self.sum_volume(parcels)
+		parcels.sum(:volume)
 	end
 
   def set_cost

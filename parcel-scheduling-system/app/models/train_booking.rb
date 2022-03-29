@@ -27,4 +27,8 @@ class TrainBooking < ApplicationRecord
   def update_parcels
   	Parcel.where(id: parcels.split(' ')).each(&:shipped!)
   end
+
+  def self.busy_lines?(parcels)
+    joins(:train).where(:trains => {source: parcels.first.source, destination: parcels.first.destination, status: "running"})
+  end
 end

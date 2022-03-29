@@ -2,6 +2,9 @@ class TrainBookingsController < ApplicationController
   before_action :authenticate_post_master, only: %i[update destroy create]
   before_action :set_train_booking, only: %i[ show edit update destroy ]
   before_action :check_authenication, only: %i[ new ]
+  before_action :get_parcels, only: %i[ new ]
+  before_action :check_busy_trains, only: %i[ new ]
+  before_action :get_trains, only: %i[ new ]
 
   def index
     @train_bookings = if current_user.is_train_operator?
@@ -12,10 +15,7 @@ class TrainBookingsController < ApplicationController
   end
 
   def new
-    @parcel_ids = params[:parcels]
     @train_booking = current_user.train_bookings.build
-    parcels = Parcel.where(id: @parcel_ids)
-    @trains = Train.where(source: parcels.first.source, destination: parcels.first.destination).available_for_parcels(@parcel_ids)
   end
 
   def create
@@ -64,5 +64,21 @@ class TrainBookingsController < ApplicationController
         flash[:error] = "Please select parcels"
         redirect_to parcels_url
       end
+    end
+
+    def get_parcels
+      @parcels = Parcel.where(id: params[:parcels])
+    end
+
+    def check_busy_trains
+      @busy_lines = TrainBooking.busy_lines?(@parcels)
+      if @busy_lines.any?
+        flash[:error] = "Lines busy where you want to send parcels"
+        redirect_to parcels_url
+      end
+    end
+
+    def get_trains
+      @trains = Train.available_for_parcels(@parcels)
     end
 end
