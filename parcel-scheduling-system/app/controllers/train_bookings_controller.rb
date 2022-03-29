@@ -14,6 +14,8 @@ class TrainBookingsController < ApplicationController
   def new
     @parcel_ids = params[:parcels]
     @train_booking = current_user.train_bookings.build
+    parcels = Parcel.where(id: @parcel_ids)
+    @trains = Train.where(source: parcels.first.source, destination: parcels.first.destination).available_for_parcels(@parcel_ids)
   end
 
   def create

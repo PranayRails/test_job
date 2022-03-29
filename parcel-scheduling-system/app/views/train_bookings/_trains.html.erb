@@ -1,37 +1,36 @@
-<% trains = get_trains %>
-  <% if trains.any? %>
-    <h2>Available Trains for selected parcels</h2>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
+<% if @trains.any? %>
+  <h2>Available Trains for selected parcels</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Weight Capacity</th>
+          <th scope="col">Volume Capacity</th>
+          <th scope="col">Source</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Status</th>
+          <th scope="col">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% trains.each do |train| %>
           <tr>
-            <th scope="col"></th>
-            <th scope="col">Weight Capacity</th>
-            <th scope="col">Volume Capacity</th>
-            <th scope="col">Source</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Status</th>
-            <th scope="col">Cost</th>
+            <td><%= f.radio_button :train_id, train.id, checked: false %></td>
+            <td scope="row"><%= train.weight_capacity %> kg</td>
+            <td><%= train.volume_capacity %>m3</td>
+            <td><%= train.source %></td>
+            <td><%= train.destination %></td>
+            <td><%= train.status %></td>
+            <td><%= train.cost %>/-</td>
           </tr>
-        </thead>
-        <tbody>
-          <% trains.each do |train| %>
-            <tr>
-              <td><%= f.radio_button :train_id, train.id, checked: false %></td>
-              <td scope="row"><%= train.weight_capacity %> kg</td>
-              <td><%= train.volume_capacity %>m3</td>
-              <td><%= train.source %></td>
-              <td><%= train.destination %></td>
-              <td><%= train.status %></td>
-              <td><%= train.cost %>/-</td>
-            </tr>
-            <% end %>
-        </tbody>
-      </table>
-    </div>
-    <%= f.hidden_field :parcels, value: @parcel_ids %>
-    <%= f.submit 'submit', class: "btn btn-primary" %>
-  <% else %>
-    <hr>
-    <h2>No available trains for selected parcels</h2>
-  <% end %>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= f.hidden_field :parcels, value: @parcel_ids %>
+  <%= f.submit 'submit', class: "btn btn-primary" %>
+<% else %>
+  <hr>
+  <h2>No available trains for selected parcels</h2>
+<% end %>
