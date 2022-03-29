@@ -11,9 +11,12 @@ import "bootstrap"
 import "jquery"
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
+
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 // Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("packs/custom")
