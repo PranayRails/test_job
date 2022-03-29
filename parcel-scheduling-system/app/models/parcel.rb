@@ -4,6 +4,8 @@ class Parcel < ApplicationRecord
 	belongs_to :train_booking, optional: true
 	enum status: { booked: 'Booked', shipped: 'Shipped', delivered: 'Delivered' }, _default: 'Booked'
 
+	validate :validate_source_and_destination
+
 	def self.sum_weight(parcel_ids)
 		Parcel.where(id: parcel_ids).sum(:weight)
 	end
@@ -11,4 +13,11 @@ class Parcel < ApplicationRecord
 	def self.sum_volume(parcel_ids)
 		Parcel.where(id: parcel_ids).sum(:volume)
 	end
+
+	def validate_source_and_destination
+		if source == destination
+			errors.add(:base, "source and destination can't be same.")
+		end
+	end
+
 end
