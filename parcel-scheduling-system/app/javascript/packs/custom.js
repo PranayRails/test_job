@@ -55,4 +55,8 @@ jQuery(document).on("turbolinks:load", function() {
 
   $("#book_train").addClass("disabled")
 
+  $("#parcel_weight").change(function() {
+    parcel_cost = $("#parcel_weight").val() * 2.5
+    $("#parcel_cost").val(parcel_cost)
+  })
 })
