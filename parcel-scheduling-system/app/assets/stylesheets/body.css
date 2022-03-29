@@ -69,3 +69,8 @@ hr:not([size]) {
 .pl-1 {
   padding-left: 10px;
 }
+
+.container {
+  max-width: 1600px;
+  margin-top: 15px;
+}
