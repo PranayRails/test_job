@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Train < ApplicationRecord
+  include Validation
   paginates_per 20
 
-  STATIONS = %w [
+  STATIONS = [
     "A",
     "B",
     "C"
@@ -20,9 +21,4 @@ class Train < ApplicationRecord
     where('weight_capacity > ? AND volume_capacity > ?', Parcel.sum_weight(parcel_ids), Parcel.sum_volume(parcel_ids)).available.order(:weight_capacity, :volume_capacity)
   end
 
-  def validate_source_and_destination
-    if source == destination
-      errors.add(:base, "source and destination can't be same.")
-    end
-  end
 end

@@ -1,5 +1,7 @@
 class Parcel < ApplicationRecord
-  validates_presence_of :weight, :volume, :source, :destination, :status, :cost  
+  include Validation
+
+  validates_presence_of :weight, :volume, :source, :destination, :status, :cost
   before_validation :set_cost
 	belongs_to :parcel_owner
 	belongs_to :train_booking, optional: true
@@ -13,12 +15,6 @@ class Parcel < ApplicationRecord
 
 	def self.sum_volume(parcel_ids)
 		Parcel.where(id: parcel_ids).sum(:volume)
-	end
-
-	def validate_source_and_destination
-		if source == destination
-			errors.add(:base, "source and destination can't be same.")
-		end
 	end
 
   def set_cost
