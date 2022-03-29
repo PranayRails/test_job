@@ -14,8 +14,8 @@
         <div class="row">
           <%= f.label "Source", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%#= f.select(:source, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true}) %>
-            <%= f.text_field :source, class: 'form-control', autofocus: true, required: true %>
+            = f.select(:source, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true})
+            <%# <%= f.text_field :source, class: 'form-control', autofocus: true, required: true %> %>
           </div>
         </div>
       </div>
@@ -23,8 +23,8 @@
         <div class="row">
           <%= f.label "Destination", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%#= f.select(:destination, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true}) %>
-            <%= f.text_field :destination, class: 'form-control', autofocus: true, required: true %>
+            = f.select(:destination, ['A', 'B', 'C'], {}, {class: 'form-control', autofocus: true})
+            <%# <%= f.text_field :destination, class: 'form-control', autofocus: true, required: true %> %>
           </div>
         </div>
       </div>

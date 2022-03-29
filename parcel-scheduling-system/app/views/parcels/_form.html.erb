@@ -53,7 +53,7 @@
         <div class="row">
           <%= f.label "Status", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
-            <%= f.select :status, Parcel.statuses.keys, {}, {class: 'form-control', autofocus: true, required: true, include_blank: false} %>
+            <%= f.select :status, Parcel.statuses.keys, {}, {class: 'form-control', disabled: true, autofocus: true, required: true, include_blank: false} %>
           </div>
         </div>
       </div>
@@ -70,4 +70,3 @@
     </div>
   </div>
 <% end %>
-
