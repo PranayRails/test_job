@@ -10,6 +10,6 @@ class Train < ApplicationRecord
   # scope :available_for_parcels, -> (weight, volume) { where('weight_capacity > ? AND volume_capacity > ?', weight, volume ) }
 
   def self.available_for_parcels(parcel_ids)
-    'ABCD 12'
+    where('weight_capacity > ? AND volume_capacity > ?', Parcel.sum_weight(parcel_ids), Parcel.sum_volume(parcel_ids)).order(:weight_capacity, :volume_capacity)
   end
 end
