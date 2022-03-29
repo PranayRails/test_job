@@ -22,7 +22,6 @@ class TrainBookingsController < ApplicationController
   end
 
   def create
-    byebug
     @train_booking = current_user.train_bookings.build(train_booking_params)
     if @train_booking.save
       flash[:success] = 'Train booking is successfully created.'
@@ -33,14 +32,14 @@ class TrainBookingsController < ApplicationController
     end
   end
 
-  def update
-    if @train_booking.update(train_booking_params)
-      flash[:success] = 'Train booking is successfully updated.'
-      redirect_to train_booking_url(@train_booking)
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @train_booking.update(train_booking_params)
+  #     flash[:success] = 'Train booking is successfully updated.'
+  #     redirect_to train_booking_url(@train_booking)
+  #   else
+  #     render :edit, status: :unprocessable_entity
+  #   end
+  # end
 
   def destroy
     @train_booking.destroy
@@ -75,6 +74,9 @@ class TrainBookingsController < ApplicationController
 
   def set_train_booking
     @train_booking = TrainBooking.find(params[:id])
+    return if @train_booking
+    flash[:error] = "Train booking not found"
+    redirect_to parcels_url
   end
 
   def train_booking_params

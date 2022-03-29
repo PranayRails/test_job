@@ -1,4 +1,4 @@
-class UpdateTrainJob
+class UpdateTrainJob < ApplicationJob
    queue_as :default
 
   def perform(train_booking_id)
@@ -16,6 +16,6 @@ class UpdateTrainJob
     parcels.each(&:delivered!)
 
     # update train booking status
-    train_booking.complete!
+    train_booking.completed!
   end
 end

@@ -33,8 +33,10 @@
           <td><%= parcel.cost %></td>
           <td>
             <%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %>
-            <%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %>
-            <%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+            <% if current_user.parcel_owner? %>
+              <%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+            <%end%>
           </td>
         </tr>
         <% end %>
