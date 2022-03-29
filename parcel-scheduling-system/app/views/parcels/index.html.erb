@@ -4,14 +4,12 @@
   </div>
   <div class="col-md-2 mt-2 d-flex">
     <% if current_user.is_parcel_owner? %>
-      <div><%= link_to 'New Parcel', new_parcel_path, class: "btn btn-primary" %></div>
+      <%= link_to 'New Parcel', new_parcel_path, class: "btn btn-primary" %>
     <%end%>
 
     <% if current_user.is_post_master? %>
-      <div>
-        <%= link_to 'Book Train', new_train_booking_path, class: 'btn btn-primary', id: 'book_train' %><br>
-        <!-- <span id='available_trains'><%#= Train.available_for_parcels([1,2]) %></span> -->
-      </div>
+      <%= link_to 'Book Train', new_train_booking_path, class: 'btn btn-primary', id: 'book_train' %><br>
+      <!-- <span id='available_trains'></span> -->
     <%end%>
   </div>
 </div>
@@ -46,10 +44,12 @@
           <td><%= parcel.source %></td>
           <td><%= parcel.destination %></td>
           <td><%= parcel.status %></td>
-          <td><%= parcel.cost %>/-</td>
-          <td><%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %></td>
-          <td><%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %></td>
-          <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %></td>
+          <td><%= parcel.cost %></td>
+          <td>
+            <%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Edit', edit_parcel_path(parcel), class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+          </td>
         </tr>
         <% end %>
     </tbody>
@@ -58,16 +58,28 @@
 
 <script type="text/javascript">
   function selectedParcels() {
-        debugger
-    var parcels_array = ''
-    var trains_count = ''
-    $(".child-checkbox input[type='checkbox']").each(function() {
-      checkbox = this.id.split('_')
-      parcels_array = parcels_array + "parcels%5B%5D="+checkbox[1]+"&"
-      trains_count = trains_count + "%5B%5D" + checkbox[1] + "&"
-    });
+    // var parcels_array = ''
+    // var parcel_ids_array = ''
+    // $(".child-checkbox input[type='checkbox']").each(function() {
+    //   checkbox = this.id.split('_')
+    //   parcels_array = parcels_array + "parcels%5B%5D="+checkbox[1]+"&"
+    //   // parcel_ids_array = parcel_ids_array + "%5B%5D" + checkbox[1] + "&"
+    // });
+    // debugger
+    // $("#available_trains").innerHTML = <%#= Train.available_for_parcels(parcel_ids_array) %>
+    var parcels_array = ""
+    if ($(".child-checkbox input[type='checkbox']:checked").length == 0) {
+      $(".child-checkbox input[type='checkbox']").each(function() {
+        checkbox = this.id.split('_')
+        parcels_array = parcels_array + "parcels%5B%5D="+checkbox[1]+"&"
+      });
+    } else {
+      $(".child-checkbox input[type='checkbox']:checked").each(function() {
+        checkbox = this.id.split('_')
+        parcels_array = parcels_array + "parcels%5B%5D="+checkbox[1]+"&"
+      })
+    }
     $("#book_train").prop('href', "/train_bookings/new?"+ parcels_array)
-    // $("#available_trains")
   }
   $('.parcel_checkbox').click(function(){
    selectedParcels();

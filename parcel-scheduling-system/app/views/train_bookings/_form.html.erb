@@ -18,6 +18,9 @@
           <%= f.label "Train", class: 'control-label col-lg-2' %>
           <div class="col-lg-8">
             <%= f.select :train_id, get_trains, {}, {class: 'form-control', autofocus: true, required: true} %>
+            <%#byebug%>
+            <%#= f.select :train, Train.available_for_parcels(params[:parcels]), class: 'form-control', autofocus: true, required: true %>
+            <%# f.hidden_field :parcels, value: params[:parcels] %>
           </div>
         </div>
       </div>
