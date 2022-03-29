@@ -1,6 +1,7 @@
 class TrainBookingsController < ApplicationController
   before_action :authenticate_post_master, only: %i[update destroy create]
   before_action :set_train_booking, only: %i[ show edit update destroy ]
+  before_action :check_authenication, only: %i[ new ]
 
   def index
     @train_bookings = if current_user.is_train_operator?
@@ -11,6 +12,7 @@ class TrainBookingsController < ApplicationController
   end
 
   def new
+    @parcel_ids = params[:parcels]
     @train_booking = TrainBooking.new
   end
 
@@ -20,6 +22,7 @@ class TrainBookingsController < ApplicationController
       flash[:success] = "Train booking is successfully created."
       redirect_to train_booking_url(@train_booking)
     else
+      @parcel_ids = train_booking_params[:parcels]
       render :new, status: :unprocessable_entity
     end
   end
@@ -52,5 +55,12 @@ class TrainBookingsController < ApplicationController
 
     def train_booking_params
       params.required(:train_booking).permit(:train_id, :post_master_id, :status)
+    end
+
+    def check_authenication
+      unless params[:parcels]
+        flash[:error] = "Please select parcels"
+        redirect_to parcels_url
+      end
     end
 end

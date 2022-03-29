@@ -34,13 +34,25 @@ jQuery(document).on("turbolinks:load", function() {
     }
   }
 
+  function buttonEnableDisable() {
+    if ($("input[type='checkbox']:checked").length == 0) {
+      $("#book_train").addClass("disabled")
+    } else {
+      $("#book_train").removeClass("disabled")
+    }
+  }
+
   $('.parcel_checkbox').click(function(){
     selectedParcels();
     disabledCheckboxes(this);
     enabledCheckboxes();
+    buttonEnableDisable();
   });
 
   $(".close").click(function() {
     $(".flash").hide();
   })
+
+  $("#book_train").addClass("disabled")
+
 })

@@ -11,38 +11,23 @@
 
   <div class="card container">
     <div class="card-body">
-      <%= f.hidden_field :post_master_id, value: current_user.id %>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "Train", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.select :train_id, get_trains, {}, {class: 'form-control', autofocus: true, required: true} %>
-            <%#byebug%>
-            <%#= f.select :train, Train.available_for_parcels(params[:parcels]), class: 'form-control', autofocus: true, required: true %>
-            <%# f.hidden_field :parcels, value: params[:parcels] %>
-          </div>
-        </div>
+      <div class="table-responsive">
+        <table class="table">
+            <tr>
+              <th scope="col">Parcels Count</th>
+              <td><%#= @parcel_ids.count %></td>
+            </tr>
+            <tr>
+              <th scope="col">Parcels Total Weight</th>
+              <td><%= Parcel.sum_weight(@parcel_ids) %></td>
+            </tr>
+            <tr>
+              <th scope="col">Parcels Total Volume</th>
+              <td><%= Parcel.sum_volume(@parcel_ids) %></td>
+            </tr>
+        </table>
       </div>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "parcels", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.select :parcels, options_for_select(["Asst", "dir", "pres"]), {}, {multiple: true, class: 'form-control', autofocus: true, required: true} %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <div class="row">
-          <%= f.label "Status", class: 'control-label col-lg-2' %>
-          <div class="col-lg-8">
-            <%= f.select :status, TrainBooking.statuses.keys, {}, {class: 'form-control', autofocus: true, required: true, include_blank: false} %>
-          </div>
-        </div>
-      </div>
-      <%= f.submit 'submit', class: "btn btn-primary" %>
+      <%= render "trains", f: f %>
     </div>
   </div>
 <% end %>

@@ -2,6 +2,13 @@
 
 class Train < ApplicationRecord
   paginates_per 20
+
+  STATIONS = %w [
+    "A",
+    "B",
+    "C"
+  ]
+
   belongs_to :train_operator
 
   enum status: { available: 'Available', running: 'Runing', reached: 'Reached' }, _default: 'Available'

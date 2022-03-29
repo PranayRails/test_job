@@ -1,5 +1,7 @@
 module TrainBookingsHelper
   def get_trains
-    Train.all.map{|train| ["#{train.source}-#{train.destination}", train.id]}
+  	parcels = Parcel.where(id: @parcel_ids)
+  	trains = Train.where(source: parcels.first.source, destination: parcels.first.destination)
+	  trains.available_for_parcels(@parcel_ids)
   end
 end
