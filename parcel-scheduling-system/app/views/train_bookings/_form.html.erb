@@ -23,6 +23,10 @@
               <th scope="col">Parcels Total Volume</th>
               <td><%= @parcels.sum(:volume) %></td>
             </tr>
+            <tr>
+              <th scope="col">Parcels Total Cost</th>
+              <td><%= @parcels.sum(:cost) %></td>
+            </tr>
         </table>
       </div>
       <%= render "trains", f: f %>

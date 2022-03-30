@@ -3,6 +3,7 @@
 # ApplicationController
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :user_signed_in?, unless: :devise_controller?
 
   private
 
@@ -17,6 +18,11 @@ class ApplicationController < ActionController::Base
     when 'PostMaster' then parcels_path
     else root_path
     end
+  end
+
+  def user_signed_in?
+    return if current_user.present?
+    redirect_to new_user_session_path
   end
 
   def configure_permitted_parameters

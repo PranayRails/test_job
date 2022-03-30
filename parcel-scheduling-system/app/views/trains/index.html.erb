@@ -7,39 +7,43 @@
   </div>
 </div>
 
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Weight Capacity</th>
-        <th scope="col">Volume Capacity</th>
-        <th scope="col">Source</th>
-        <th scope="col">Destination</th>
-        <th scope="col">Status</th>
-        <th scope="col">Cost</th>
-        <th scope="col" colspan="3">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @trains.each do |train| %>
+<%if @trains.any? %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= train.name %></td>
-          <td scope="row"><%= train.weight_capacity %> kg</td>
-          <td><%= train.volume_capacity %>m3</td>
-          <td><%= train.source %></td>
-          <td><%= train.destination %></td>
-          <td><%= train.status %></td>
-          <td><%= train.cost %>/-</td>
-          <td>
-            <%= link_to 'Show', train, class: "btn btn-sm btn-primary" %>
-            <%= link_to 'Edit', edit_train_path(train), class: "btn btn-sm btn-primary" %>
-            <% if current_user.train_operator? && !train.running? %>
-              <%= link_to 'Withdraw', train_path(train), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
-            <% end %>
-          </td>
+          <th scope="col">Name</th>
+          <th scope="col">Weight Capacity</th>
+          <th scope="col">Volume Capacity</th>
+          <th scope="col">Source</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Status</th>
+          <th scope="col">Cost</th>
+          <th scope="col" colspan="3">Actions</th>
         </tr>
+      </thead>
+      <tbody>
+        <% @trains.each do |train| %>
+          <tr>
+            <td><%= train.name %></td>
+            <td scope="row"><%= train.weight_capacity %> kg</td>
+            <td><%= train.volume_capacity %>m3</td>
+            <td><%= train.source %></td>
+            <td><%= train.destination %></td>
+            <td><%= train.status %></td>
+            <td><%= train.cost %>/-</td>
+            <td>
+              <%= link_to 'Show', train, class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Edit', edit_train_path(train), class: "btn btn-sm btn-primary" %>
+              <% if current_user.train_operator? && !train.running? %>
+                <%= link_to 'Withdraw', train_path(train), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <h4>Trains not available</h4>
+<% end %>
