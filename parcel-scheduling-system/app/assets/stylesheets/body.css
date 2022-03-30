@@ -74,7 +74,3 @@ hr:not([size]) {
   max-width: 1600px;
   margin-top: 15px;
 }
-
-.mb-3, .my-3 {
-  margin-bottom: 0rem !important;
-}

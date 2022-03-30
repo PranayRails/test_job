@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <% if current_user.post_master? %>
+        <% if current_user.post_master? && !@train_booking.present? %>
           <th scope="col"></th>
         <% end %>
         <th scope="col">Weight</th>
@@ -17,7 +17,7 @@
     <tbody>
       <% parcels.each do |parcel| %>
         <tr>
-          <% if current_user.post_master? %>
+          <% if current_user.post_master? && !@train_booking.present? %>
             <td>
               <div class="custom-control custom-checkbox child-checkbox">
                 <input name="parcels[]" type="checkbox" class="custom-control-input parcel_checkbox" id="checkbox_<%= parcel.id %>" value="<%= parcel.id %>">

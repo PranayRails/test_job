@@ -9,7 +9,7 @@
       <% if current_user.present? %>
         <% if current_user.post_master? %>
           <li class="nav-item active">
-            <%= link_to "Bookings", train_bookings_path, method: :delete, class: "nav-link hover-underline-animation"%>
+            <%= link_to "Bookings", train_bookings_path, class: "nav-link hover-underline-animation"%>
           </li>
         <% end %>
         <li class="nav-item active">
