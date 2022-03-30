@@ -37,6 +37,7 @@ class TrainBooking < ApplicationRecord
   end
 
   def self.busy_lines?(parcels)
-    joins(:train).where(trains: { source: [parcels.first.source, parcels.first.destination], destination: [parcels.first.source, parcels.first.destination], status: 'running' })
+    joins(:train).where(trains: { source: [parcels.first.source, parcels.first.destination],
+                                  destination: [parcels.first.source, parcels.first.destination], status: 'running' })
   end
 end
