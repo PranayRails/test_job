@@ -3,7 +3,7 @@ class Parcel < ApplicationRecord
 
   validates_presence_of :weight, :volume, :source, :destination, :status, :cost
 	validate :validate_source_and_destination
-  before_validation :set_cost
+  before_create :set_cost
 	belongs_to :parcel_owner
 	belongs_to :train_booking, optional: true
 	enum status: { booked: 'Booked', shipped: 'Shipped', delivered: 'Delivered' }, _default: 'Booked'
