@@ -11,16 +11,10 @@ class User < ApplicationRecord
 
   validate :validate_type
 
-  def train_operator?
-    type == 'TrainOperator'
-  end
-
-  def parcel_owner?
-    type == 'ParcelOwner'
-  end
-
-  def post_master?
-    type == 'PostMaster'
+  %i[train_operator post_master parcel_owner].each do |attribute|
+    define_method :"#{attribute}?" do
+      type == attribute.to_s.classify
+    end
   end
 
   def validate_type
