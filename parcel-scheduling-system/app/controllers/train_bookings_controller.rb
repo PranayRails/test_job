@@ -2,7 +2,7 @@
 
 # TrainBookingsController
 class TrainBookingsController < ApplicationController
-  before_action :authenticate_post_master, only: %i[update destroy create]
+  before_action :authenticate_post_master
   before_action :set_train_booking, only: %i[ show edit update destroy ]
   before_action :check_parcels, only: %i[ new ]
   before_action :get_parcels, only: %i[ new ]
@@ -52,8 +52,8 @@ class TrainBookingsController < ApplicationController
   def authenticate_post_master
     return if current_user.post_master?
 
-    flash[:success] = 'Unauthorised access denied.'
-    redirect_to train_bookings_url
+    flash[:error] = 'Unauthorised access denied.'
+    redirect_to root_url
   end
 
   def get_parcels
