@@ -2,7 +2,7 @@
 
 # ParcelsController
 class ParcelsController < ApplicationController
-  before_action :authenicate_parcel_owner
+  before_action :authenicate_parcel_owner, except: %i[index show]
   before_action :set_parcel, only: %i[show edit update destroy]
   before_action :editable_parcel?, only: %i[edit]
 
@@ -46,7 +46,7 @@ class ParcelsController < ApplicationController
   private
 
   def authenicate_parcel_owner
-    return unless current_user.train_operator?
+    return if current_user.parcel_owner?
 
     redirect_to root_url, notice: 'Unauthorised access denied.'
   end
