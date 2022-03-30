@@ -4,6 +4,7 @@
 class ParcelsController < ApplicationController
   before_action :authenicate_parcel_owner
   before_action :set_parcel, only: %i[show edit update destroy]
+  before_action :editable_parcel?, only: %i[ edit ]
 
   def index
     @parcels = if current_user.post_master?
@@ -56,5 +57,12 @@ class ParcelsController < ApplicationController
 
   def parcel_params
     params.require(:parcel).permit(:weight, :volume, :source, :destination, :status, :cost, :parcel_owner_id)
+  end
+
+  def editable_parcel?
+    return if @parcel.booked?
+
+    flash[:error] = "Parcel is shipped/delivered"
+    redirect_to root_url
   end
 end

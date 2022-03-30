@@ -4,6 +4,7 @@
 class TrainsController < ApplicationController
   before_action :authenicate_parcel_owner
   before_action :set_train, only: %i[show edit update destroy]
+  before_action :editable_train?, only: %i[ edit ]
 
   def index
     @trains = current_user.trains.page(params[:page]).per(10)
@@ -54,5 +55,12 @@ class TrainsController < ApplicationController
 
   def train_params
     params.require(:train).permit(:name, :source, :destination, :weight_capacity, :volume_capacity, :cost)
+  end
+
+  def editable_train?
+    return if @train.available?
+
+    flash[:error] = "Train is running stage."
+    redirect_to root_url
   end
 end
