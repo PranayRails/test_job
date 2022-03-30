@@ -7,7 +7,7 @@ class TrainsController < ApplicationController
   before_action :editable_train?, only: %i[edit]
 
   def index
-    @trains = current_user.trains.page(params[:page]).per(10)
+    @trains = current_user.trains.not_unavailable.page(params[:page]).per(10)
   end
 
   def new
@@ -35,9 +35,9 @@ class TrainsController < ApplicationController
   end
 
   def destroy
-    return unless @train.destroy
+    return unless @train.unavailable!
 
-    flash[:success] = 'Train is successfully destroyed.'
+    flash[:success] = 'Train is withdrawn successfully.'
     redirect_to trains_url
   end
 

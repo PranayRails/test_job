@@ -35,7 +35,7 @@
             <%= link_to 'Show', train, class: "btn btn-sm btn-primary" %>
             <%= link_to 'Edit', edit_train_path(train), class: "btn btn-sm btn-primary" %>
             <% if current_user.train_operator? && train.available? %>
-              <%= link_to 'Destroy', train_path(train), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Withdraw', train_path(train), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
             <% end %>
           </td>
         </tr>

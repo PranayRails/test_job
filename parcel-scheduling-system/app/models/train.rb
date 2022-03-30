@@ -9,7 +9,7 @@ class Train < ApplicationRecord
 
   belongs_to :train_operator
 
-  enum status: { available: 'Available', running: 'Running', reached: 'Reached' }, _default: 'Available'
+  enum status: { available: 'Available', running: 'Running', reached: 'Reached', unavailable: 'Unavailable' }, _default: 'Available'
 
   validates_presence_of :name, :source, :destination, :weight_capacity, :status, :cost
   validate :validate_source_and_destination
