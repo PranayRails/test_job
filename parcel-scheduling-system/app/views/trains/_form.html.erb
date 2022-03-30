@@ -57,6 +57,16 @@
           </div>
         </div>
       </div>
+      <% if f.object.reached? %>
+        <div class="form-group mb-3">
+          <div class="row">
+            <%= f.label "Status", class: 'control-label col-lg-2' %>
+            <div class="col-lg-8">
+              <%= f.select :status, Train.statuses.keys, {}, {class: 'form-control', autofocus: true, required: true, include_blank: false} %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <%= f.submit 'submit', class: "btn btn-primary" %>
     </div>
   </div>

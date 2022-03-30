@@ -54,11 +54,11 @@ class TrainsController < ApplicationController
   end
 
   def train_params
-    params.require(:train).permit(:name, :source, :destination, :weight_capacity, :volume_capacity, :cost)
+    params.require(:train).permit(:name, :source, :destination, :weight_capacity, :volume_capacity, :cost, :status)
   end
 
   def editable_train?
-    return if @train.available?
+    return unless @train.running?
 
     flash[:error] = 'Train is running stage.'
     redirect_to root_url
