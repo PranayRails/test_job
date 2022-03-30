@@ -14,12 +14,10 @@ class ParcelsController < ApplicationController
   end
 
   def new
-    byebug
     @parcel = Parcel.new
   end
 
   def create
-    byebug
     @parcel = Parcel.new(parcel_params)
     if @parcel.save
       flash[:success] = 'Parcel is successfully created'
