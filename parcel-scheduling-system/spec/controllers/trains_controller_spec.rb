@@ -52,9 +52,8 @@ RSpec.describe TrainsController, type: :controller do
   describe 'destroy' do
     it 'sign in the trains operator and allows to destroy the train' do
       sign_in @trains_operator
-      expect do
-        delete :destroy, params: { id: @train.id }
-      end.to change { Train.count }.by(-1)
+      delete :destroy, params: { id: @train.id }
+      expect(flash[:success]).to eq('Train is withdrawn successfully.')
     end
   end
 end

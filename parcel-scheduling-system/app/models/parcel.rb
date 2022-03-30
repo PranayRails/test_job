@@ -8,15 +8,15 @@ class Parcel < ApplicationRecord
   validate :validate_source_and_destination
   before_create :set_cost
   before_destroy :can_destroy?
-	belongs_to :parcel_owner
-	belongs_to :train_booking, optional: true
-	enum status: { booked: 'Booked', shipped: 'Shipped', delivered: 'Delivered' }, _default: 'Booked'
+  belongs_to :parcel_owner
+  belongs_to :train_booking, optional: true
+  enum status: { booked: 'Booked', shipped: 'Shipped', delivered: 'Delivered' }, _default: 'Booked'
 
   def set_cost
     self.cost = weight * 2.5
   end
 
   def can_destroy?
-    errors.add(:base, "Parcel cannot be deleted") unless booked?
+    errors.add(:base, 'Parcel cannot be deleted') unless booked?
   end
 end
