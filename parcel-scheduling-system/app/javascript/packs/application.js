@@ -15,6 +15,7 @@ import 'regenerator-runtime/runtime'
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("@rails/ujs").start()
 // Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

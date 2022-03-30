@@ -33,8 +33,8 @@
           <td><%= parcel.cost %></td>
           <td>
             <%= link_to 'Show', parcel, class: "btn btn-sm btn-primary" %>
-            <% if current_user.parcel_owner? %>
-              <%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+            <% if current_user.parcel_owner? && parcel.booked? %>
+              <%= link_to 'Destroy', parcel_path(parcel), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
             <%end%>
           </td>
         </tr>

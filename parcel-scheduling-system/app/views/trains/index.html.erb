@@ -34,7 +34,7 @@
           <td>
             <%= link_to 'Show', train, class: "btn btn-sm btn-primary" %>
             <%= link_to 'Edit', edit_train_path(train), class: "btn btn-sm btn-primary" %>
-            <%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Destroy', train_path(train), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
           </td>
         </tr>
         <% end %>

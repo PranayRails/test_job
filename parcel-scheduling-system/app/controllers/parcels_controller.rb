@@ -39,7 +39,7 @@ class ParcelsController < ApplicationController
   def destroy
     return unless @parcel.destroy
 
-    redirect_to parcel_url, success: 'Parcel is successfully destroyed.'
+    redirect_to parcels_path, success: 'Parcel is successfully destroyed.'
   end
 
   private
