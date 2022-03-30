@@ -13,15 +13,15 @@
     <%= render 'train_details', train: @train %>
     <tr>
       <th scope="col">Source</th>
-      <td><%= train.source %></td>
+      <td><%= @train.source %></td>
     </tr>
     <tr>
       <th scope="col">Destination</th>
-      <td><%= train.destination %></td>
+      <td><%= @train.destination %></td>
     </tr>
     <tr>
       <th scope="col">Status</th>
-      <td><%= train.status %></td>
+      <td><%= @train.status %></td>
     </tr>
   </table>
 </div>

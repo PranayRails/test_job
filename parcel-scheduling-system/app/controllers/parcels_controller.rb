@@ -7,7 +7,7 @@ class ParcelsController < ApplicationController
 
   def index
     @parcels = if current_user.post_master?
-                 Parcel.all
+                 Parcel.booked
                else
                  current_user.parcels
                end.page(params[:page]).per(10)

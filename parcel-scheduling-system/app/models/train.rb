@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
+# Train
 class Train < ApplicationRecord
   include Validation
   paginates_per 20
 
-  STATIONS = [
-    "A",
-    "B",
-    "C"
-  ]
+  STATIONS = %w[A B C].freeze
 
   belongs_to :train_operator
 
@@ -18,6 +15,8 @@ class Train < ApplicationRecord
   validate :validate_source_and_destination
 
   def self.available_for_parcels(parcels)
-    where('weight_capacity > ? AND volume_capacity > ?', parcels.sum(:weight), parcels.sum(:volume)).available.order(:weight_capacity, :volume_capacity)
+    where('weight_capacity > ? AND volume_capacity > ?', parcels.sum(:weight), parcels.sum(:volume)).available.order(
+      :weight_capacity, :volume_capacity
+    )
   end
 end

@@ -3,11 +3,11 @@
 # TrainBookingsController
 class TrainBookingsController < ApplicationController
   before_action :authenticate_post_master
-  before_action :set_train_booking, only: %i[ show edit update destroy ]
-  before_action :check_parcels, only: %i[ new ]
-  before_action :get_parcels, only: %i[ new ]
-  before_action :check_busy_trains, only: %i[ new ]
-  before_action :get_trains, only: %i[ new ]
+  before_action :set_train_booking, only: %i[show edit update destroy]
+  before_action :check_parcels, only: :new
+  before_action :set_parcels, only: :new
+  before_action :check_busy_trains, only: :new
+  before_action :set_trains, only: :new
 
   def index
     @train_bookings = if current_user.train_operator?
@@ -56,26 +56,27 @@ class TrainBookingsController < ApplicationController
     redirect_to root_url
   end
 
-  def get_parcels
+  def set_parcels
     @parcels = Parcel.where(id: params[:parcels])
   end
 
   def check_busy_trains
     @busy_lines = TrainBooking.busy_lines?(@parcels)
-    if @busy_lines.any?
-      flash[:error] = "Lines busy where you want to send parcels"
-      redirect_to parcels_url
-    end
+    return unless @busy_lines.any?
+
+    flash[:error] = 'Lines busy where you want to send parcels'
+    redirect_to parcels_url
   end
 
-  def get_trains
+  def set_trains
     @trains = Train.available_for_parcels(@parcels)
   end
 
   def set_train_booking
     @train_booking = TrainBooking.find(params[:id])
     return if @train_booking
-    flash[:error] = "Train booking not found"
+
+    flash[:error] = 'Train booking not found'
     redirect_to parcels_url
   end
 
@@ -90,4 +91,3 @@ class TrainBookingsController < ApplicationController
     redirect_to parcels_url
   end
 end
-

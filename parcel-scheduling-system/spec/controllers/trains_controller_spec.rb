@@ -1,12 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe TrainsController, type: :controller do
   before(:example) do
-    @trains_operator = TrainOperator.create( name: "Train Operator", email: "train-operator@yopmail.com", password: "train-operator")
-    @train = Train.create(name: 'Thomas', source: 'source 1', destination: 'dest 2', weight_capacity: 200, volume_capacity: 10000, status: 'Available', cost: 200, train_operator_id: @trains_operator.id)
+    @trains_operator = TrainOperator.create(name: 'Train Operator',
+                                            email: 'train-operator@yopmail.com',
+                                            password: 'train-operator')
+    @train = Train.create(name: 'Thomas', source: 'source 1',
+                          destination: 'dest 2', weight_capacity: 200,
+                          volume_capacity: 10_000, status: 'Available',
+                          cost: 200, train_operator_id: @trains_operator.id)
   end
 
-  describe "GET /index" do
+  describe 'GET /index' do
     it 'sign in the trains operator and shows the trains' do
       sign_in @trains_operator
       get :index
@@ -20,7 +27,8 @@ RSpec.describe TrainsController, type: :controller do
       expect do
         post :create, params: {
           train: {
-            name: 'Elwis', source: 'sour 1', destination: 'dest 2', weight_capacity: 200, volume_capacity: 10000, cost: 200
+            name: 'Elwis', source: 'sour 1', destination: 'dest 2',
+            weight_capacity: 200, volume_capacity: 10_000, cost: 200
           }
         }
       end.to change { Train.count }.by(1)
@@ -46,7 +54,7 @@ RSpec.describe TrainsController, type: :controller do
       sign_in @trains_operator
       expect do
         delete :destroy, params: { id: @train.id }
-      end.to change {Train.count}.by(-1)
+      end.to change { Train.count }.by(-1)
     end
   end
 end
