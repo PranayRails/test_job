@@ -13,5 +13,8 @@
     <%end%>
   </div>
 </div>
-
-<%= render 'parcels', parcels: @parcels %>
+<% if @parcels.any? %>
+  <%= render 'parcels', parcels: @parcels %>
+<% else %>
+  <h4>Parcels not available</h4>
+<% end %>
