@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   validate :validate_type
 
+  validates_presence_of :name
+
   %i[train_operator post_master parcel_owner].each do |attribute|
     define_method :"#{attribute}?" do
       type == attribute.to_s.classify
