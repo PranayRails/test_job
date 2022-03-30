@@ -8,4 +8,20 @@
   </div>
 </div>
 
-<%= render 'train_details', train: @train %>
+<div class="table-responsive">
+  <table class="table">
+    <%= render 'train_details', train: @train %>
+    <tr>
+      <th scope="col">Source</th>
+      <td><%= train.source %></td>
+    </tr>
+    <tr>
+      <th scope="col">Destination</th>
+      <td><%= train.destination %></td>
+    </tr>
+    <tr>
+      <th scope="col">Status</th>
+      <td><%= train.status %></td>
+    </tr>
+  </table>
+</div>

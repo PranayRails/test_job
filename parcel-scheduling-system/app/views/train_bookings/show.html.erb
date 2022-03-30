@@ -3,6 +3,7 @@
     <h2>Booking</h2>
   </div>
   <div class="col-md-2 mt-2">
+    <%#= link_to 'Edit Booking', edit_train_booking_path(@train_booking), class: "btn btn-primary" %>
     <%= link_to 'Back', train_bookings_path, class: "btn btn-primary" %>
   </div>
 </div>
@@ -11,23 +12,53 @@
   <table class="table">
     <tr>
       <th scope="col">Departure Time</th>
+      <th scope="col"></th>
       <td><%= @train_booking.departure_time %></td>
     </tr>
     <tr>
       <th scope="col">Arrival Time</th>
+      <th scope="col"></th>
       <td><%= @train_booking.arrival_time %></td>
     </tr>
     <tr>
       <th scope="col">Source</th>
+      <th scope="col"></th>
       <td><%= @train_booking.train.source %></td>
     </tr>
     <tr>
       <th scope="col">Destination</th>
+      <th scope="col"></th>
       <td><%= @train_booking.train.destination %></td>
     </tr>
     <tr>
       <th scope="col">Status</th>
+      <th scope="col"></th>
       <td><%= @train_booking.status %></td>
+    </tr>
+    <tr>
+      <th scope="col">Post Master</th>
+      <th scope="col"></th>
+      <td><%= @train_booking.post_master.name %></td>
+    </tr>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Train Details</th>
+      <th scope="col"></th>
+    </tr>
+    <tr>
+      <div class="table-responsive">
+        <table class="table">
+          <%= render 'trains/train_details', train: @train_booking.train %>
+        </table>
+      </div>
+    </tr>
+    <tr style='text-align: center;'>
+      <th scope="col">
+        <b >Parcel Details</b>
+      </th>
+    </tr>
+    <tr>
+      <%= render 'parcels/parcels', parcels: @train_booking.parcels %>
     </tr>
   </table>
 </div>

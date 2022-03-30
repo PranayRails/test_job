@@ -25,6 +25,7 @@ class TrainBooking < ApplicationRecord
 
   def update_train!
   	self.train.running!
+    UpdateTrainJob.set(wait_until: arrival_time).perform_later(self.id)
   end
 
   def parcels_train_booking!
