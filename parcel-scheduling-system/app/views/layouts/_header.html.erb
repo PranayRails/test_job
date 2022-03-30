@@ -7,6 +7,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user.present? %>
+        <li class="nav-item active">
+          <%= link_to "Home", root_path, class: "nav-link hover-underline-animation"%>
+        </li>
         <% if current_user.post_master? %>
           <li class="nav-item active">
             <%= link_to "Bookings", train_bookings_path, class: "nav-link hover-underline-animation"%>
