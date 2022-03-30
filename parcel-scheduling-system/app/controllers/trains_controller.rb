@@ -53,6 +53,6 @@ class TrainsController < ApplicationController
   end
 
   def train_params
-    params.require(:train).permit(:source, :destination, :weight_capacity, :volume_capacity, :cost)
+    params.require(:train).permit(:name, :source, :destination, :weight_capacity, :volume_capacity, :cost)
   end
 end

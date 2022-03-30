@@ -34,7 +34,7 @@ Train.create(
   train_operator_id: train_operator.id
 )
 Train.create(
-  name: 'george',
+  name: 'George',
   source: "B",
   destination: "C",
   weight_capacity: 150,
